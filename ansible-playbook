@@ -1,0 +1,16 @@
+---
+- hosts: python
+  remote_user: ansadmin
+  become: yes
+  tasks:   
+    - name: Build Docker image from Dockerfile
+      docker_image:
+        name: python
+        path: ./dockerfile
+        state: build
+        
+    - name: Running the container
+      docker_container:
+        image: python:latest
+        path: dockerfile
+        state: running
